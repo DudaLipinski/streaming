@@ -13,6 +13,9 @@ const theme = {
     medium: "22px",
     large: "20px",
   },
+  centralizer: {
+    medium: "0 80px",
+  },
 };
 
 const Theme = ({ children }) => (
