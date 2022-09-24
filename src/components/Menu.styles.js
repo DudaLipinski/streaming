@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.header`
   width: 100%;
   height: 90px;
-  background-color: blue;
+  background-color: rgb(0 0 255 / 0%);
+  position: fixed;
 `;
 
 export const Centralizer = styled.div`
