@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import * as Styled from "./Carousel.styles";
+import { getMostPopularMovies } from "../services";
 import Godzilla from "../assets/godzilla.png";
 import arrowLeft from "../assets/arrowLeft.png";
 import arrowRight from "../assets/arrowRight.png";
@@ -35,6 +36,7 @@ const Carousel = () => {
   const displayedItemsCount = useRef(5);
   const [itemWidth, setItemWidth] = useState(0);
   const [leftmostItem, setLeftmostItem] = useState(0);
+  const [popularMovies, setPopularMovies] = useState();
 
   const lastItemIndex = items.length - 1;
   const rightmostItem = leftmostItem + (displayedItemsCount.current - 1);
@@ -60,6 +62,17 @@ const Carousel = () => {
     setLeftmostItem((prevLeftmostItem) => prevLeftmostItem + 1);
   };
 
+  const loadMostPopularMovies = () => {
+    const res = getMostPopularMovies();
+    setPopularMovies(res);
+
+    console.log(popularMovies);
+  };
+
+  useEffect(() => {
+    loadMostPopularMovies();
+  });
+
   useEffect(() => {
     const itemsContainerWidth = itemsContainerRef.current.clientWidth;
 
@@ -76,7 +89,6 @@ const Carousel = () => {
     }
 
     setItemWidth(itemsContainerWidth / displayedItemsCount.current);
-    console.log(itemsContainerRef.current.clientWidth);
   }, []);
 
   return (
@@ -98,8 +110,8 @@ const Carousel = () => {
             ref={itemsContainerRef}
           >
             {itemWidth
-              ? items.map((item) => (
-                  <Styled.Item>
+              ? items.map((item, index) => (
+                  <Styled.Item key={index}>
                     <img src={item.img} alt=""></img>
                     <Styled.WrapperHeart>
                       <Styled.Heart src={heart} alt=""></Styled.Heart>
