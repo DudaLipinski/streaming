@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Centralizer = styled.div`
-  height: inherit;
   padding: ${(props) => props.theme.centralizer.medium};
 `;
 
@@ -10,7 +9,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: inherit;
+  padding: 50px 0;
 `;
 
 export const Title = styled.h2`
@@ -50,7 +49,7 @@ export const Star = styled.img`
 `;
 
 export const WrapperButtons = styled.div`
-  margin: 50px 0;
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -97,7 +96,7 @@ export const Watch = styled.button`
   }
 `;
 
-export const Icon = styled.img`
+export const Heart = styled.img`
   width: 23px;
   height: auto;
   padding: 0 0 0 40px;

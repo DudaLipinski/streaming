@@ -11,7 +11,7 @@ const theme = {
   fontSizes: {
     small: "16px",
     medium: "22px",
-    large: "20px",
+    large: "26px",
   },
   centralizer: {
     medium: "0 80px",

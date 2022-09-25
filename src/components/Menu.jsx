@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as Styled from "./Menu.styles";
 
-import Heart from "../assets/heart.png";
-import Search from "../assets/search.png";
+import heart from "../assets/heart.png";
+import search from "../assets/search.png";
 
 const Menu = () => {
   return (
@@ -25,10 +25,10 @@ const Menu = () => {
         <nav>
           <Styled.MenuList>
             <Link to="">
-              <Styled.Icon src={Search} alt="" />
+              <Styled.Icon src={search} alt="" />
             </Link>
             <Link to="">
-              <Styled.Icon src={Heart} alt="" />
+              <Styled.Icon src={heart} alt="" />
             </Link>
           </Styled.MenuList>
         </nav>

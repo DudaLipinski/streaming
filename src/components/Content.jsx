@@ -1,17 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import * as Styled from "./Content.styles";
+import Carousel from "./Carousel";
 
 import Godzilla from "../assets/godzilla.png";
-import StarImage from "../assets/star.png";
-import Heart from "../assets/heart.png";
+import starImage from "../assets/star.png";
+import heart from "../assets/heart.png";
 
-const Container = styled.section`
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
   width: 100%;
   height: 100vh;
   background-image: url(${Godzilla});
   background-position: top center;
+  background-size: cover;
 `;
 
 const Content = () => {
@@ -26,21 +31,20 @@ const Content = () => {
             eget lacus. Turpis urna nunc odio vel. Pharetra scelerisque turpis
           </Styled.Description>
           <Styled.Rating>
-            <Styled.Star src={StarImage}></Styled.Star>
-            <Styled.Star src={StarImage}></Styled.Star>
-            <Styled.Star src={StarImage}></Styled.Star>
-            <Styled.Star src={StarImage}></Styled.Star>
-            <Styled.Star src={StarImage}></Styled.Star>
+            <Styled.Star src={starImage}></Styled.Star>
+            <Styled.Star src={starImage}></Styled.Star>
+            <Styled.Star src={starImage}></Styled.Star>
+            <Styled.Star src={starImage}></Styled.Star>
+            <Styled.Star src={starImage}></Styled.Star>
           </Styled.Rating>
           <Styled.WrapperButtons>
             <Styled.Watch>Watch Now</Styled.Watch>
             <Styled.Trailer to="">Trailler</Styled.Trailer>
-            <Link to="">
-              <Styled.Icon src={Heart} alt="" />
-            </Link>
+            <Styled.Heart src={heart} alt="" />
           </Styled.WrapperButtons>
         </Styled.Wrapper>
       </Styled.Centralizer>
+      <Carousel />
     </Container>
   );
 };
