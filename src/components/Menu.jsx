@@ -12,10 +12,10 @@ const Menu = () => {
         <nav>
           <Styled.MenuList>
             <Styled.MenuItem>
-              <Link to="">Movies</Link>
+              <Link to="/movies">Movies</Link>
             </Styled.MenuItem>
             <Styled.MenuItem>
-              <Link to="">Tv Shows</Link>
+              <Link to="/tv-series">Tv Series</Link>
             </Styled.MenuItem>
             <Styled.MenuItem>
               <Link to="">Directories</Link>

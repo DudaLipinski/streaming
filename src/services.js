@@ -6,9 +6,9 @@
 //   },
 // };
 
-import { mostPopularMovies } from "./mockedData";
+import { mostPopularMovies, mostPopularTvSeries } from "./mockedData";
 
-export const getMostPopularMovies = () => {
+export const getMostPopularMovies = async () => {
   return mostPopularMovies;
   // const res = await fetch(
   //   "https://imdb8.p.rapidapi.com/title/get-most-popular-movies",
@@ -17,9 +17,18 @@ export const getMostPopularMovies = () => {
   // return res.json();
 };
 
+export const getMostPopularTvSeries = async () => {
+  return mostPopularTvSeries;
+  // const res = await fetch(
+  //   "https://imdb8.p.rapidapi.com/title/get-most-popular-tv-shows",
+  //   options
+  // );
+  // return res.json();
+};
+
 //Most popular movies
 // fetch(
-//   "https://imdb8.p.rapidapi.com/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US",
+//   "https://imdb8.p.rapidapi.com/title/get-most-popular-movies",
 //   options
 // )
 //   .then((response) => response.json())
@@ -28,7 +37,7 @@ export const getMostPopularMovies = () => {
 
 // Most popular tv series
 // fetch(
-//   "https://imdb8.p.rapidapi.com/title/get-most-popular-tv-shows?homeCountry=US&purchaseCountry=US&currentCountry=US",
+//   "https://imdb8.p.rapidapi.com/title/get-most-popular-tv-shows",
 //   options
 // )
 //   .then((response) => response.json())

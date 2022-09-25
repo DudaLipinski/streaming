@@ -43,6 +43,7 @@ export const WrapperHeart = styled.div`
 export const Heart = styled.img``;
 
 export const Item = styled.div`
+  cursor: pointer;
   padding: 16px 20px;
   box-sizing: border-box;
   display: flex;

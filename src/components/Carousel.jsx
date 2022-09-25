@@ -1,42 +1,15 @@
 import { useRef, useEffect, useState } from "react";
 import * as Styled from "./Carousel.styles";
-import { getMostPopularMovies } from "../services";
-import Godzilla from "../assets/godzilla.png";
 import arrowLeft from "../assets/arrowLeft.png";
 import arrowRight from "../assets/arrowRight.png";
 import heart from "../assets/heart.png";
 
-const items = [
-  {
-    img: Godzilla,
-  },
-  {
-    img: Godzilla,
-  },
-  {
-    img: Godzilla,
-  },
-  {
-    img: Godzilla,
-  },
-  {
-    img: Godzilla,
-  },
-  {
-    img: Godzilla,
-  },
-  {
-    img: Godzilla,
-  },
-];
-
-const Carousel = () => {
+const Carousel = ({ items, onToggle }) => {
   const itemsContainerRef = useRef();
 
   const displayedItemsCount = useRef(5);
   const [itemWidth, setItemWidth] = useState(0);
   const [leftmostItem, setLeftmostItem] = useState(0);
-  const [popularMovies, setPopularMovies] = useState();
 
   const lastItemIndex = items.length - 1;
   const rightmostItem = leftmostItem + (displayedItemsCount.current - 1);
@@ -62,17 +35,6 @@ const Carousel = () => {
     setLeftmostItem((prevLeftmostItem) => prevLeftmostItem + 1);
   };
 
-  const loadMostPopularMovies = () => {
-    const res = getMostPopularMovies();
-    setPopularMovies(res);
-
-    console.log(popularMovies);
-  };
-
-  useEffect(() => {
-    loadMostPopularMovies();
-  });
-
   useEffect(() => {
     const itemsContainerWidth = itemsContainerRef.current.clientWidth;
 
@@ -91,10 +53,14 @@ const Carousel = () => {
     setItemWidth(itemsContainerWidth / displayedItemsCount.current);
   }, []);
 
+  useEffect(() => {
+    setLeftmostItem(0);
+  }, [items]);
+
   return (
     <div>
       <Styled.CentralizerTitle>
-        <Styled.Title>Next Movies</Styled.Title>
+        <Styled.Title>Most popular</Styled.Title>
       </Styled.CentralizerTitle>
       <Styled.Container>
         <Styled.ArrowContainer
@@ -111,8 +77,11 @@ const Carousel = () => {
           >
             {itemWidth
               ? items.map((item, index) => (
-                  <Styled.Item key={index}>
-                    <img src={item.img} alt=""></img>
+                  <Styled.Item
+                    onClick={() => onToggle(index)}
+                    key={item.title.title}
+                  >
+                    <img src={item.title.image.url} alt=""></img>
                     <Styled.WrapperHeart>
                       <Styled.Heart src={heart} alt=""></Styled.Heart>
                     </Styled.WrapperHeart>
@@ -131,4 +100,5 @@ const Carousel = () => {
     </div>
   );
 };
+
 export default Carousel;

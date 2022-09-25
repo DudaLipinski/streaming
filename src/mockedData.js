@@ -1,15 +1,3 @@
-export const mostPopularMoviesId = {
-  0: "/title/tt10648342/",
-  1: "/title/tt4593060/",
-  2: "/title/tt10640346/",
-  3: "/title/tt13833688/",
-  4: "/title/tt5971474/",
-  5: "/title/tt15791034/",
-  6: "/title/tt10731256/",
-  7: "/title/tt1745960/",
-  8: "/title/tt1655389/",
-};
-
 export const mostPopularMovies = [
   {
     id: "/title/tt10648342/",
@@ -349,18 +337,6 @@ export const mostPopularMovies = [
     },
   },
 ];
-
-export const mostPopularTvSeriesId = {
-  0: "/title/tt11198330/",
-  1: "/title/tt7631058/",
-  2: "/title/tt7221388/",
-  3: "/title/tt10857160/",
-  4: "/title/tt0944947/",
-  5: "/title/tt4786824/",
-  6: "/title/tt3032476/",
-  7: "/title/tt5834204/",
-  8: "/title/tt15432016/",
-};
 
 export const mostPopularTvSeries = [
   {

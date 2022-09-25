@@ -1,51 +1,93 @@
-import React from "react";
-import styled from "styled-components";
+import { useState, useEffect } from "react";
 import * as Styled from "./Content.styles";
 import Carousel from "./Carousel";
+import { getMostPopularMovies, getMostPopularTvSeries } from "../services";
 
-import Godzilla from "../assets/godzilla.png";
+import emptyStar from "../assets/emptyStar.png";
 import starImage from "../assets/star.png";
 import heart from "../assets/heart.png";
-
-const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-
-  width: 100%;
-  height: 100vh;
-  background-image: url(${Godzilla});
-  background-position: top center;
-  background-size: cover;
-`;
+import { useParams } from "react-router-dom";
 
 const Content = () => {
+  const { type } = useParams();
+
+  const [items, setItems] = useState();
+  const [highlightedItem, setHighlightedItem] = useState();
+  const [isHighlightedItem, setIsHighlightedItem] = useState();
+
+  const loadMostPopularItems = async () => {
+    const getMostPopularItems =
+      type === "movies" ? getMostPopularMovies : getMostPopularTvSeries;
+    const res = await getMostPopularItems();
+
+    setItems(res);
+    setHighlightedItem(res[0]);
+  };
+
+  useEffect(() => {
+    loadMostPopularItems();
+  }, [type]);
+
+  if (!highlightedItem) {
+    return <Styled.Title>Loading...</Styled.Title>;
+  }
+
+  const handleHighlightItem = (index) => {
+    setHighlightedItem(items[index]);
+  };
+
+  const { title, year } = highlightedItem.title;
+  const img = highlightedItem.title.image.url;
+  const description = highlightedItem.plotOutline.text;
+  const rating = highlightedItem.ratings.rating;
+
+  const handleWatchNow = () => {
+    const params = new URLSearchParams({ q: `watch ${title} ${type} ${year}` });
+    const googleUrl = `https://www.google.com/search?${params.toString()}`;
+    window.open(googleUrl, "__blank");
+  };
+
+  const handleTrailer = () => {
+    const params = new URLSearchParams({
+      search_query: `trailer ${title} ${type} ${year}`,
+    });
+    const youtubeUrl = `https://www.youtube.com/results?${params.toString()}`;
+    window.open(youtubeUrl, "__blank");
+  };
+
   return (
-    <Container>
+    <Styled.Container img={img}>
       <Styled.Centralizer>
         <Styled.Wrapper>
-          <Styled.Title>GODZILLA</Styled.Title>
-          <Styled.SubTitle>KINGS OF THE MONSTER</Styled.SubTitle>
-          <Styled.Description>
-            consectetur adipiscing elit. Diam quis maecenas fermentum mattis
-            eget lacus. Turpis urna nunc odio vel. Pharetra scelerisque turpis
-          </Styled.Description>
-          <Styled.Rating>
-            <Styled.Star src={starImage}></Styled.Star>
-            <Styled.Star src={starImage}></Styled.Star>
-            <Styled.Star src={starImage}></Styled.Star>
-            <Styled.Star src={starImage}></Styled.Star>
-            <Styled.Star src={starImage}></Styled.Star>
-          </Styled.Rating>
+          <Styled.Title>{title}</Styled.Title>
+          <Styled.SubTitle></Styled.SubTitle>
+          <Styled.Description>{description}</Styled.Description>
+          {rating ? (
+            <Styled.Rating>
+              <Styled.Star src={starImage}></Styled.Star>
+              <Styled.Star
+                src={rating > 2 ? starImage : emptyStar}
+              ></Styled.Star>
+              <Styled.Star
+                src={rating > 4 ? starImage : emptyStar}
+              ></Styled.Star>
+              <Styled.Star
+                src={rating > 6 ? starImage : emptyStar}
+              ></Styled.Star>
+              <Styled.Star
+                src={rating > 8 ? starImage : emptyStar}
+              ></Styled.Star>
+            </Styled.Rating>
+          ) : null}
           <Styled.WrapperButtons>
-            <Styled.Watch>Watch Now</Styled.Watch>
-            <Styled.Trailer to="">Trailler</Styled.Trailer>
+            <Styled.Watch onClick={handleWatchNow}>Watch Now</Styled.Watch>
+            <Styled.Trailer onClick={handleTrailer}>Trailler</Styled.Trailer>
             <Styled.Heart src={heart} alt="" />
           </Styled.WrapperButtons>
         </Styled.Wrapper>
       </Styled.Centralizer>
-      <Carousel />
-    </Container>
+      <Carousel items={items} onToggle={handleHighlightItem} />
+    </Styled.Container>
   );
 };
 

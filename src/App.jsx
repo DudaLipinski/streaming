@@ -1,9 +1,8 @@
-import React from "react";
 import Theme from "./css/Theme";
 import GlobalStyles from "./css/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
 import Menu from "./components/Menu";
-import Content from "./components/Content";
+import Routes from "./appRoutes";
 
 const App = () => {
   return (
@@ -12,7 +11,7 @@ const App = () => {
       <BrowserRouter>
         <div className="App">
           <Menu />
-          <Content></Content>
+          <Routes />
         </div>
       </BrowserRouter>
     </Theme>

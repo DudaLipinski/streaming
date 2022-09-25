@@ -1,6 +1,18 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+export const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  width: 100%;
+  height: 100vh;
+  background-image: url(${(props) => props.img};);
+  background-position: top center;
+  background-size: cover;
+`;
+
 export const Centralizer = styled.div`
   padding: ${(props) => props.theme.centralizer.medium};
 `;
@@ -9,13 +21,13 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 50px 0;
+  padding: 80px 0 0;
 `;
 
 export const Title = styled.h2`
   color: ${(props) => props.theme.colors.white};
   font-weight: 700;
-  font-size: 120px;
+  font-size: 80px;
   margin: 0;
   letter-spacing: -4px;
 `;
@@ -30,8 +42,9 @@ export const SubTitle = styled.h3`
 `;
 
 export const Description = styled.p`
-  width: 40%;
   color: ${(props) => props.theme.colors.white};
+  width: 50%;
+
   font-weight: 400;
   font-size: 22px;
   line-height: 28px;
