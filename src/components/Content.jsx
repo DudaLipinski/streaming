@@ -9,11 +9,10 @@ import heart from "../assets/heart.png";
 import { useParams } from "react-router-dom";
 
 const Content = () => {
-  const { type } = useParams();
+  const { type = "movies" } = useParams();
 
   const [items, setItems] = useState();
-  const [highlightedItem, setHighlightedItem] = useState();
-  const [isHighlightedItem, setIsHighlightedItem] = useState();
+  const [highlightedItemIndex, setHighlightedItemIndex] = useState();
 
   const loadMostPopularItems = async () => {
     const getMostPopularItems =
@@ -21,25 +20,26 @@ const Content = () => {
     const res = await getMostPopularItems();
 
     setItems(res);
-    setHighlightedItem(res[0]);
+    setHighlightedItemIndex(0);
   };
 
   useEffect(() => {
     loadMostPopularItems();
   }, [type]);
 
-  if (!highlightedItem) {
+  if (highlightedItemIndex === undefined) {
     return <Styled.Title>Loading...</Styled.Title>;
   }
 
-  const handleHighlightItem = (index) => {
-    setHighlightedItem(items[index]);
-  };
-
+  const highlightedItem = items[highlightedItemIndex];
   const { title, year } = highlightedItem.title;
   const img = highlightedItem.title.image.url;
   const description = highlightedItem.plotOutline.text;
   const rating = highlightedItem.ratings.rating;
+
+  const highlightItem = (index) => {
+    setHighlightedItemIndex(index);
+  };
 
   const handleWatchNow = () => {
     const params = new URLSearchParams({ q: `watch ${title} ${type} ${year}` });
@@ -57,36 +57,44 @@ const Content = () => {
 
   return (
     <Styled.Container img={img}>
-      <Styled.Centralizer>
-        <Styled.Wrapper>
-          <Styled.Title>{title}</Styled.Title>
-          <Styled.SubTitle></Styled.SubTitle>
-          <Styled.Description>{description}</Styled.Description>
-          {rating ? (
+      <Styled.Blur>
+        <Styled.Centralizer>
+          <Styled.Wrapper>
+            <Styled.Title>{title}</Styled.Title>
+            <Styled.SubTitle></Styled.SubTitle>
+            <Styled.Description>{description}</Styled.Description>
             <Styled.Rating>
-              <Styled.Star src={starImage}></Styled.Star>
-              <Styled.Star
-                src={rating > 2 ? starImage : emptyStar}
-              ></Styled.Star>
-              <Styled.Star
-                src={rating > 4 ? starImage : emptyStar}
-              ></Styled.Star>
-              <Styled.Star
-                src={rating > 6 ? starImage : emptyStar}
-              ></Styled.Star>
-              <Styled.Star
-                src={rating > 8 ? starImage : emptyStar}
-              ></Styled.Star>
+              {rating ? (
+                <>
+                  <Styled.Star src={starImage}></Styled.Star>
+                  <Styled.Star
+                    src={rating > 2 ? starImage : emptyStar}
+                  ></Styled.Star>
+                  <Styled.Star
+                    src={rating > 4 ? starImage : emptyStar}
+                  ></Styled.Star>
+                  <Styled.Star
+                    src={rating > 6 ? starImage : emptyStar}
+                  ></Styled.Star>
+                  <Styled.Star
+                    src={rating > 8 ? starImage : emptyStar}
+                  ></Styled.Star>
+                </>
+              ) : null}
             </Styled.Rating>
-          ) : null}
-          <Styled.WrapperButtons>
-            <Styled.Watch onClick={handleWatchNow}>Watch Now</Styled.Watch>
-            <Styled.Trailer onClick={handleTrailer}>Trailler</Styled.Trailer>
-            <Styled.Heart src={heart} alt="" />
-          </Styled.WrapperButtons>
-        </Styled.Wrapper>
-      </Styled.Centralizer>
-      <Carousel items={items} onToggle={handleHighlightItem} />
+            <Styled.WrapperButtons>
+              <Styled.Watch onClick={handleWatchNow}>Watch Now</Styled.Watch>
+              <Styled.Trailer onClick={handleTrailer}>Trailler</Styled.Trailer>
+              {/* <Styled.Heart src={heart} alt="" /> */}
+            </Styled.WrapperButtons>
+          </Styled.Wrapper>
+        </Styled.Centralizer>
+        <Carousel
+          items={items}
+          highlightedItemIndex={highlightedItemIndex}
+          onItemClick={highlightItem}
+        />
+      </Styled.Blur>
     </Styled.Container>
   );
 };

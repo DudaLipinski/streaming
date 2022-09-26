@@ -5,6 +5,7 @@ export const Container = styled.header`
   height: 90px;
   background-color: rgb(0 0 255 / 0%);
   position: fixed;
+  z-index: 1;
 `;
 
 export const Centralizer = styled.div`
@@ -28,6 +29,7 @@ export const MenuItem = styled.li`
   a {
     color: ${(props) => props.theme.colors.white};
     text-decoration: none;
+    font-weight: 500;
   }
 
   a:visited {
@@ -36,7 +38,7 @@ export const MenuItem = styled.li`
 
   a:link:active,
   a:visited:active {
-    font-weight: 500;
+    font-weight: 600;
   }
 `;
 

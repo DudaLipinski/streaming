@@ -21,8 +21,9 @@ export const ArrowIcon = styled.img`
 
 export const Title = styled.h2`
   font-weight: 700;
-  font-size: 42px;
+  font-size: 32px;
   line-height: 42px;
+  margin-bottom: 10px;
   color: ${(props) => props.theme.colors.white};
 `;
 
@@ -40,31 +41,46 @@ export const WrapperHeart = styled.div`
   display: flex;
 `;
 
-export const Heart = styled.img``;
+export const Cover = styled.img`
+  height: 100%;
+  width: ${(props) => props.width}px;
+  object-fit: cover;
+  object-position: bottom;
+  transition: 4s;
+`;
 
 export const Item = styled.div`
   cursor: pointer;
   padding: 16px 20px;
   box-sizing: border-box;
   display: flex;
+  transition: 4s;
+`;
 
-  img {
-    height: 100%;
-    width: min-content;
-    object-fit: cover;
-    flex-grow: 1;
-  }
+export const HighlightedCover = styled.img`
+  height: 100%;
+  width: ${(props) => props.width}px;
+  object-fit: cover;
+  object-position: center;
+`;
 
-  ${Heart} {
-    position: absolute;
-    width: inherit;
-    height: auto;
-    padding: 10px 15px;
-  }
+export const HighlightedItem = styled.div`
+  border: 2px solid ${(props) => props.theme.colors.blue};
+  cursor: pointer;
+  padding: 0;
+  box-sizing: none;
+  display: flex;
+`;
+
+export const Heart = styled.img`
+  position: absolute;
+  width: inherit;
+  height: auto;
+  margin: 20px 25px;
 `;
 
 export const ItemsWrapper = styled.div`
-  height: 230px;
+  height: 375px;
   background: rgba(103, 101, 113, 0.34);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);

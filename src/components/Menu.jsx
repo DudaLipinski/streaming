@@ -17,19 +17,16 @@ const Menu = () => {
             <Styled.MenuItem>
               <Link to="/tv-series">Tv Series</Link>
             </Styled.MenuItem>
-            <Styled.MenuItem>
-              <Link to="">Directories</Link>
-            </Styled.MenuItem>
           </Styled.MenuList>
         </nav>
         <nav>
           <Styled.MenuList>
-            <Link to="">
+            {/* <Link to="">
               <Styled.Icon src={search} alt="" />
             </Link>
             <Link to="">
               <Styled.Icon src={heart} alt="" />
-            </Link>
+            </Link> */}
           </Styled.MenuList>
         </nav>
       </Styled.Centralizer>
