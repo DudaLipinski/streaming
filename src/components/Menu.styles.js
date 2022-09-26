@@ -30,6 +30,7 @@ export const MenuItem = styled.li`
     color: ${(props) => props.theme.colors.white};
     text-decoration: none;
     font-weight: 500;
+    text-shadow: 0px 1px 3px rgb(0 0 0 / 55%);
   }
 
   a:visited {

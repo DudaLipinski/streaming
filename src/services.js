@@ -26,6 +26,15 @@ export const getMostPopularTvSeries = async () => {
   // return res.json();
 };
 
+export const getMostPopularMoviesAndTvSeries = async () => {
+  const mostPopularMovies = await getMostPopularMovies();
+  const mostPopularTvSeries = await getMostPopularTvSeries();
+
+  const allItems = mostPopularMovies.concat(mostPopularTvSeries);
+
+  return allItems;
+};
+
 //Most popular movies
 // fetch(
 //   "https://imdb8.p.rapidapi.com/title/get-most-popular-movies",

@@ -2,7 +2,7 @@ import Theme from "./css/Theme";
 import GlobalStyles from "./css/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
 import Menu from "./components/Menu";
-import Routes from "./appRoutes";
+import AppRoutes from "./AppRoutes";
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
       <BrowserRouter>
         <div className="App">
           <Menu />
-          <Routes />
+          <AppRoutes />
         </div>
       </BrowserRouter>
     </Theme>

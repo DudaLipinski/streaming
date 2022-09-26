@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+export const Loading = styled.h3`
+  text-align: center;
+  color: ${(props) => props.theme.colors.blue};
+  padding-top: 250px;
+`;
+
 export const Container = styled.main`
   display: flex;
   flex-direction: column;
@@ -41,15 +47,7 @@ export const Title = styled.h2`
   font-size: 60px;
   margin: 0;
   letter-spacing: -4px;
-`;
-
-export const SubTitle = styled.h3`
-  color: ${(props) => props.theme.colors.white};
-  font-weight: 700;
-  font-size: 40px;
-  margin: 0;
-  letter-spacing: -2px;
-  word-spacing: 8px;
+  text-shadow: 0px 1px 3px rgb(0 0 0 / 55%);
 `;
 
 export const Description = styled.p`
@@ -61,6 +59,7 @@ export const Description = styled.p`
   font-size: 22px;
   line-height: 28px;
   letter-spacing: 0.17em;
+  text-shadow: 0px 1px 3px rgb(0 0 0 / 55%);
 `;
 
 export const Rating = styled.div`

@@ -6,6 +6,10 @@ import heartEmpty from "../assets/heartEmpty.png";
 import search from "../assets/search.png";
 
 const Menu = () => {
+  const handleSearch = () => {};
+
+  const handleChange = (event) => {};
+
   return (
     <Styled.Container>
       <Styled.Centralizer>
@@ -21,12 +25,19 @@ const Menu = () => {
         </nav>
         <nav>
           <Styled.MenuList>
-            {/* <Link to="">
+            {/* <form onSubmit={handleSearch}>
+              <input
+                type="text"
+                placeholder="Search"
+                onChange={handleChange}
+                name="search"
+                // value={}
+              />
               <Styled.Icon src={search} alt="" />
-            </Link>
-            <Link to="">
+            </form> */}
+            <Link to="/favorites">
               <Styled.Icon src={heartEmpty} alt="" />
-            </Link> */}
+            </Link>
           </Styled.MenuList>
         </nav>
       </Styled.Centralizer>

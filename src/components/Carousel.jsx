@@ -6,7 +6,7 @@ import heartEmpty from "../assets/heartEmpty.png";
 import heart from "../assets/heart.png";
 
 const Carousel = ({
-  type,
+  title,
   items,
   highlightedItemIndex,
   onItemClick,
@@ -27,7 +27,9 @@ const Carousel = ({
   const coverWidth = itemWidth - 30;
 
   const canSwipeLeft = leftmostItem > 0;
-  const canSwipeRight = lastItemIndex !== rightmostItem;
+  const canSwipeRight =
+    lastItemIndex !== rightmostItem &&
+    items.length > displayedItemsCount.current;
 
   const handleLeftClick = () => {
     if (!canSwipeLeft) {
@@ -70,9 +72,7 @@ const Carousel = ({
   return (
     <div>
       <Styled.CentralizerTitle>
-        <Styled.Title>
-          Popular {type === "movies" ? "Movies" : "Tv Series"}
-        </Styled.Title>
+        <Styled.Title>{title}</Styled.Title>
       </Styled.CentralizerTitle>
       <Styled.Container>
         <Styled.ArrowContainer
@@ -91,8 +91,8 @@ const Carousel = ({
               ? items.map((item, index) => {
                   const isHighlighted = highlightedItemIndex === index;
                   const isFavorite = favoriteItems.includes(item.id);
-                  const { id, title } = item.title;
-                  const { url } = item.title.image;
+                  const { id, title, image } = item;
+                  const { url } = image;
 
                   const IconHeart = () => (
                     <Styled.WrapperHeart>
@@ -108,34 +108,26 @@ const Carousel = ({
                     </Styled.WrapperHeart>
                   );
 
-                  return (
-                    <>
-                      {isHighlighted ? (
-                        <Styled.HighlightedItem
-                          key={id}
-                          onClick={() => onItemClick(index)}
-                        >
-                          <Styled.HighlightedCover
-                            src={url}
-                            alt={title}
-                            width={coverWidth}
-                          ></Styled.HighlightedCover>
-                          <IconHeart />
-                        </Styled.HighlightedItem>
-                      ) : (
-                        <Styled.Item
-                          key={id}
-                          onClick={() => onItemClick(index)}
-                        >
-                          <Styled.Cover
-                            src={url}
-                            alt={title}
-                            width={coverWidth}
-                          ></Styled.Cover>
-                          <IconHeart />
-                        </Styled.Item>
-                      )}
-                    </>
+                  return isHighlighted ? (
+                    <Styled.HighlightedItem key={id}>
+                      <Styled.HighlightedCover
+                        src={url}
+                        alt={title}
+                        width={coverWidth}
+                        onClick={() => onItemClick(index)}
+                      ></Styled.HighlightedCover>
+                      <IconHeart />
+                    </Styled.HighlightedItem>
+                  ) : (
+                    <Styled.Item key={id}>
+                      <Styled.Cover
+                        src={url}
+                        alt={title}
+                        width={coverWidth}
+                        onClick={() => onItemClick(index)}
+                      ></Styled.Cover>
+                      <IconHeart />
+                    </Styled.Item>
                   );
                 })
               : null}
