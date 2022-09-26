@@ -3,17 +3,19 @@ import GlobalStyles from "./css/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
 import Menu from "./components/Menu";
 import AppRoutes from "./AppRoutes";
+import { Provider } from "react-redux";
+import state from "./state";
 
 const App = () => {
   return (
     <Theme>
       <GlobalStyles />
-      <BrowserRouter>
-        <div className="App">
+      <Provider store={state}>
+        <BrowserRouter>
           <Menu />
           <AppRoutes />
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
     </Theme>
   );
 };

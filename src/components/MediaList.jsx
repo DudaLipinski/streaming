@@ -7,18 +7,27 @@ import emptyStar from "../assets/emptyStar.png";
 import starImage from "../assets/star.png";
 import heartEmpty from "../assets/heartEmpty.png";
 import heart from "../assets/heart.png";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectors as favoritesSelectors,
+  actions as favoritesActions,
+} from "../state/favorites";
 
-const HighlightedItem = ({
-  item,
-  isFavorite,
-  addToFavorites,
-  removeFromFavorites,
-}) => {
-  const { id, title, description, year, rating } = item;
+const HighlightedItem = ({ item }) => {
+  const { id, title, description, year, titleType, rating } = item;
+
+  const dispatch = useDispatch();
+  const favoriteItems = useSelector(favoritesSelectors.getFavorites);
+
+  const isFavorite = favoriteItems.includes(id);
+
+  const addToFavorites = (id) => dispatch(favoritesActions.addFavorite(id));
+  const removeFromFavorites = (id) =>
+    dispatch(favoritesActions.removeFavorite(id));
 
   const handleWatchNow = () => {
     const params = new URLSearchParams({
-      q: `watch ${title} ${"movie"} ${year}`,
+      q: `watch ${title} ${titleType} ${year}`,
     });
     const googleUrl = `https://www.google.com/search?${params.toString()}`;
     window.open(googleUrl, "__blank");
@@ -26,7 +35,7 @@ const HighlightedItem = ({
 
   const handleTrailer = () => {
     const params = new URLSearchParams({
-      search_query: `trailer ${title} ${"movie"} ${year}`,
+      search_query: `trailer ${title} ${titleType} ${year}`,
     });
     const youtubeUrl = `https://www.youtube.com/results?${params.toString()}`;
     window.open(youtubeUrl, "__blank");
@@ -74,38 +83,27 @@ const HighlightedItem = ({
 
 const MediaList = ({ items, carouselTitle }) => {
   const [highlightedItemIndex, setHighlightedItemIndex] = useState(0);
-  const [favoriteItems, setFavoriteItems] = useState([]);
+
+  const dispatch = useDispatch();
+  const favoriteItems = useSelector(favoritesSelectors.getFavorites);
 
   const highlightedItem = items?.[highlightedItemIndex];
   if (!highlightedItem) {
     return null;
   }
 
-  const isHighlightedFavorite = favoriteItems.includes(highlightedItem.id);
-
   const highlightItem = (index) => {
     setHighlightedItemIndex(index);
   };
 
-  const addToFavorites = (id) => {
-    setFavoriteItems((prevFavoriteItems) => [...prevFavoriteItems, id]);
-  };
-
-  const removeFromFavorites = (id) => {
-    setFavoriteItems((prevFavoriteItems) =>
-      prevFavoriteItems.filter((itemId) => itemId !== id)
-    );
-  };
+  const addToFavorites = (id) => dispatch(favoritesActions.addFavorite(id));
+  const removeFromFavorites = (id) =>
+    dispatch(favoritesActions.removeFavorite(id));
 
   return (
     <Styled.Container img={highlightedItem.image.url}>
       <Styled.Blur>
-        <HighlightedItem
-          item={highlightedItem}
-          isFavorite={isHighlightedFavorite}
-          addToFavorites={addToFavorites}
-          removeFromFavorites={removeFromFavorites}
-        />
+        <HighlightedItem item={highlightedItem} />
         <Carousel
           title={carouselTitle}
           items={items}

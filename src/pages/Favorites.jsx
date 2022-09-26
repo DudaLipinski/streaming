@@ -5,17 +5,25 @@ import { getMostPopularMoviesAndTvSeries } from "../services";
 
 import MediaList from "../components/MediaList";
 import { getMediaSummary } from "../utils";
+import { useSelector } from "react-redux";
+import { selectors as favoritesSelectors } from "../state/favorites";
 
 const Favorites = () => {
-  const favorites = [];
   const [isLoading, setIsLoading] = useState(true);
-  const [favoriteMedia, setFavoriteMedia] = useState();
+  const [items, setItems] = useState([]);
+  const [favoriteItems, setFavoriteItems] = useState([]);
+
+  const favorites = useSelector(favoritesSelectors.getFavorites);
 
   const loadItems = async () => {
     const result = await getMostPopularMoviesAndTvSeries();
-    const favoriteItems = result.filter(({ id }) => favorites.includes(id));
+    console.log("--- result ---"); // [XXX] REMOVE BEFORE COMMITING
+    console.log(result); // [XXX] REMOVE BEFORE COMMITING
+    const digestedItems = result.map(getMediaSummary);
 
-    setFavoriteMedia(favoriteItems.map(getMediaSummary));
+    setItems(digestedItems);
+    setFavoriteItems(digestedItems.filter(({ id }) => favorites.includes(id)));
+
     setIsLoading(false);
   };
 
@@ -23,15 +31,26 @@ const Favorites = () => {
     loadItems();
   }, []);
 
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    setFavoriteItems(items.filter(({ id }) => favorites.includes(id)));
+  }, [favorites]);
+
+  console.log("--- favoriteItems ---"); // [XXX] REMOVE BEFORE COMMITING
+  console.log(favoriteItems); // [XXX] REMOVE BEFORE COMMITING
+
   if (isLoading) {
     return <Loading>Loading...</Loading>;
   }
 
-  if (!favoriteMedia?.length) {
+  if (!favoriteItems?.length) {
     return <Loading>You don't have favorites :( </Loading>;
   }
 
-  return <MediaList items={favoriteMedia} title="Favorites" />;
+  return <MediaList items={favoriteItems} title="Favorites" />;
 };
 
 export default Favorites;

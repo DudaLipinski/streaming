@@ -1,5 +1,5 @@
 export const getMediaSummary = (mediaData) => {
-  const { id, title, image, year } = mediaData.title;
+  const { id, title, image, year, titleType } = mediaData.title;
   const description = mediaData.plotOutline.text;
   const rating = mediaData.ratings.rating;
 
@@ -8,6 +8,7 @@ export const getMediaSummary = (mediaData) => {
     title,
     description,
     year,
+    titleType,
     image,
     rating,
   };
