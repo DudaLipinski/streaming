@@ -2,11 +2,19 @@ import { useRef, useEffect, useState } from "react";
 import * as Styled from "./Carousel.styles";
 import arrowLeft from "../assets/arrowLeft.png";
 import arrowRight from "../assets/arrowRight.png";
+import heartEmpty from "../assets/heartEmpty.png";
 import heart from "../assets/heart.png";
 
-const Carousel = ({ items, highlightedItemIndex, onItemClick }) => {
+const Carousel = ({
+  type,
+  items,
+  highlightedItemIndex,
+  onItemClick,
+  favoriteItems,
+  removeFromFavorites,
+  addToFavorites,
+}) => {
   const itemsContainerRef = useRef();
-  console.log(highlightedItemIndex);
 
   const displayedItemsCount = useRef(6);
   const [itemWidth, setItemWidth] = useState(0);
@@ -62,7 +70,9 @@ const Carousel = ({ items, highlightedItemIndex, onItemClick }) => {
   return (
     <div>
       <Styled.CentralizerTitle>
-        <Styled.Title>Most popular</Styled.Title>
+        <Styled.Title>
+          Popular {type === "movies" ? "Movies" : "Tv Series"}
+        </Styled.Title>
       </Styled.CentralizerTitle>
       <Styled.Container>
         <Styled.ArrowContainer
@@ -80,35 +90,51 @@ const Carousel = ({ items, highlightedItemIndex, onItemClick }) => {
             {itemWidth
               ? items.map((item, index) => {
                   const isHighlighted = highlightedItemIndex === index;
+                  const isFavorite = favoriteItems.includes(item.id);
+                  const { id, title } = item.title;
+                  const { url } = item.title.image;
+
+                  const IconHeart = () => (
+                    <Styled.WrapperHeart>
+                      <Styled.Heart
+                        onClick={() =>
+                          isFavorite
+                            ? removeFromFavorites(id)
+                            : addToFavorites(id)
+                        }
+                        src={isFavorite ? heart : heartEmpty}
+                        alt=""
+                      ></Styled.Heart>
+                    </Styled.WrapperHeart>
+                  );
 
                   return (
                     <>
                       {isHighlighted ? (
                         <Styled.HighlightedItem
+                          key={id}
                           onClick={() => onItemClick(index)}
-                          key={item.title.title}
                         >
                           <Styled.HighlightedCover
-                            src={item.title.image.url}
-                            alt=""
-                            width={coverWidth + 25}
+                            src={url}
+                            alt={title}
+                            width={coverWidth}
                           ></Styled.HighlightedCover>
+                          <IconHeart />
                         </Styled.HighlightedItem>
                       ) : (
                         <Styled.Item
+                          key={id}
                           onClick={() => onItemClick(index)}
-                          key={item.title.title}
                         >
                           <Styled.Cover
-                            src={item.title.image.url}
-                            alt=""
+                            src={url}
+                            alt={title}
                             width={coverWidth}
                           ></Styled.Cover>
+                          <IconHeart />
                         </Styled.Item>
                       )}
-                      <Styled.WrapperHeart>
-                        <Styled.Heart src={heart} alt=""></Styled.Heart>
-                      </Styled.WrapperHeart>
                     </>
                   );
                 })

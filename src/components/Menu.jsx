@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as Styled from "./Menu.styles";
 
-import heart from "../assets/heart.png";
+import heartEmpty from "../assets/heartEmpty.png";
 import search from "../assets/search.png";
 
 const Menu = () => {
@@ -25,7 +25,7 @@ const Menu = () => {
               <Styled.Icon src={search} alt="" />
             </Link>
             <Link to="">
-              <Styled.Icon src={heart} alt="" />
+              <Styled.Icon src={heartEmpty} alt="" />
             </Link> */}
           </Styled.MenuList>
         </nav>

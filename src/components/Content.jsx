@@ -5,14 +5,16 @@ import { getMostPopularMovies, getMostPopularTvSeries } from "../services";
 
 import emptyStar from "../assets/emptyStar.png";
 import starImage from "../assets/star.png";
+import heartEmpty from "../assets/heartEmpty.png";
 import heart from "../assets/heart.png";
 import { useParams } from "react-router-dom";
 
 const Content = () => {
-  const { type = "movies" } = useParams();
+  const { type } = useParams();
 
   const [items, setItems] = useState();
   const [highlightedItemIndex, setHighlightedItemIndex] = useState();
+  const [favoriteItems, setFavoriteItems] = useState([]);
 
   const loadMostPopularItems = async () => {
     const getMostPopularItems =
@@ -32,10 +34,11 @@ const Content = () => {
   }
 
   const highlightedItem = items[highlightedItemIndex];
-  const { title, year } = highlightedItem.title;
+  const { id, title, year } = highlightedItem.title;
   const img = highlightedItem.title.image.url;
   const description = highlightedItem.plotOutline.text;
   const rating = highlightedItem.ratings.rating;
+  const isFavorite = favoriteItems.includes(id);
 
   const highlightItem = (index) => {
     setHighlightedItemIndex(index);
@@ -53,6 +56,16 @@ const Content = () => {
     });
     const youtubeUrl = `https://www.youtube.com/results?${params.toString()}`;
     window.open(youtubeUrl, "__blank");
+  };
+
+  const addToFavorites = (id) => {
+    setFavoriteItems((prevFavoriteItems) => [...prevFavoriteItems, id]);
+  };
+
+  const removeFromFavorites = (id) => {
+    setFavoriteItems((prevFavoriteItems) =>
+      prevFavoriteItems.filter((itemId) => itemId !== id)
+    );
   };
 
   return (
@@ -85,14 +98,24 @@ const Content = () => {
             <Styled.WrapperButtons>
               <Styled.Watch onClick={handleWatchNow}>Watch Now</Styled.Watch>
               <Styled.Trailer onClick={handleTrailer}>Trailler</Styled.Trailer>
-              {/* <Styled.Heart src={heart} alt="" /> */}
+              <Styled.Heart
+                onClick={() =>
+                  isFavorite ? removeFromFavorites(id) : addToFavorites(id)
+                }
+                src={isFavorite ? heart : heartEmpty}
+                alt=""
+              />
             </Styled.WrapperButtons>
           </Styled.Wrapper>
         </Styled.Centralizer>
         <Carousel
+          type={type}
           items={items}
           highlightedItemIndex={highlightedItemIndex}
           onItemClick={highlightItem}
+          favoriteItems={favoriteItems}
+          removeFromFavorites={removeFromFavorites}
+          addToFavorites={addToFavorites}
         />
       </Styled.Blur>
     </Styled.Container>

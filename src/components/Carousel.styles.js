@@ -31,13 +31,18 @@ export const CentralizerTitle = styled.div`
   padding: ${(props) => props.theme.centralizer.medium};
 `;
 
-export const WrapperHeart = styled.div`
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: flex-start;
+export const Item = styled.article`
+  cursor: pointer;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  display: flex;
+`;
 
-  width: 23px;
-  height: auto;
+export const HighlightedItem = styled.article`
+  border: 2px solid ${(props) => props.theme.colors.blue};
+  cursor: pointer;
+  padding: 0;
+  box-sizing: none;
   display: flex;
 `;
 
@@ -46,36 +51,27 @@ export const Cover = styled.img`
   width: ${(props) => props.width}px;
   object-fit: cover;
   object-position: bottom;
-  transition: 4s;
-`;
-
-export const Item = styled.div`
-  cursor: pointer;
-  padding: 16px 20px;
-  box-sizing: border-box;
-  display: flex;
-  transition: 4s;
 `;
 
 export const HighlightedCover = styled.img`
   height: 100%;
-  width: ${(props) => props.width}px;
+  width: ${(props) => props.width + 25}px;
   object-fit: cover;
   object-position: center;
 `;
 
-export const HighlightedItem = styled.div`
-  border: 2px solid ${(props) => props.theme.colors.blue};
-  cursor: pointer;
-  padding: 0;
-  box-sizing: none;
+export const WrapperHeart = styled.div`
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: flex-start;
+
   display: flex;
 `;
 
 export const Heart = styled.img`
-  position: absolute;
-  width: inherit;
+  width: 23px;
   height: auto;
+  position: absolute;
   margin: 20px 25px;
 `;
 
