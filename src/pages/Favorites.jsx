@@ -17,8 +17,6 @@ const Favorites = () => {
 
   const loadItems = async () => {
     const result = await getMostPopularMoviesAndTvSeries();
-    console.log("--- result ---"); // [XXX] REMOVE BEFORE COMMITING
-    console.log(result); // [XXX] REMOVE BEFORE COMMITING
     const digestedItems = result.map(getMediaSummary);
 
     setItems(digestedItems);
@@ -38,9 +36,6 @@ const Favorites = () => {
 
     setFavoriteItems(items.filter(({ id }) => favorites.includes(id)));
   }, [favorites]);
-
-  console.log("--- favoriteItems ---"); // [XXX] REMOVE BEFORE COMMITING
-  console.log(favoriteItems); // [XXX] REMOVE BEFORE COMMITING
 
   if (isLoading) {
     return <Loading>Loading...</Loading>;

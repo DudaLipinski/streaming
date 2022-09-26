@@ -122,6 +122,7 @@ export const Watch = styled.button`
 `;
 
 export const Heart = styled.img`
+  cursor: pointer;
   width: 23px;
   height: auto;
   padding: 0 0 0 40px;
