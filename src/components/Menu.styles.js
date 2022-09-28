@@ -48,3 +48,9 @@ export const Icon = styled.img`
   height: auto;
   padding: 0 0 0 40px;
 `;
+
+export const Line = styled.div`
+  border: 1px solid ${(props) => props.theme.colors.blue};
+  width: 20px;
+  position: absolute;
+`;

@@ -1,14 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as Styled from "./Menu.styles";
 
 import heartEmpty from "../assets/heartEmpty.png";
 import search from "../assets/search.png";
 
 const Menu = () => {
-  const handleSearch = () => {};
-
-  const handleChange = (event) => {};
+  const location = useLocation();
+  const pathname = location.pathname;
 
   return (
     <Styled.Container>
@@ -17,9 +16,11 @@ const Menu = () => {
           <Styled.MenuList>
             <Styled.MenuItem>
               <Link to="/movies">Movies</Link>
+              {pathname === "/movies" ? <Styled.Line /> : null}
             </Styled.MenuItem>
             <Styled.MenuItem>
               <Link to="/tv-series">Tv Series</Link>
+              {pathname === "/tv-series" ? <Styled.Line /> : null}
             </Styled.MenuItem>
           </Styled.MenuList>
         </nav>
