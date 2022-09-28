@@ -1,7 +1,7 @@
 import Theme from "./css/Theme";
 import GlobalStyles from "./css/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
-import Menu from "./components/Menu";
+import Menu from "./components/Menu/Menu";
 import AppRoutes from "./AppRoutes";
 import { Provider } from "react-redux";
 import state from "./state";

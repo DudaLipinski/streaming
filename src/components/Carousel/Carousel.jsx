@@ -1,15 +1,15 @@
 import { useRef, useEffect, useState } from "react";
 import * as Styled from "./Carousel.styles";
-import Centralizer from "./Centralizer";
+import Centralizer from "../Centralizer";
 import {
   selectors as favoritesSelectors,
   actions as favoritesActions,
-} from "../state/favorites";
+} from "../../state/favorites";
 
-import arrowLeft from "../assets/arrowLeft.png";
-import arrowRight from "../assets/arrowRight.png";
-import heartEmpty from "../assets/heartEmpty.png";
-import heart from "../assets/heart.png";
+import arrowLeft from "../../assets/arrowLeft.png";
+import arrowRight from "../../assets/arrowRight.png";
+import heartEmpty from "../../assets/heartEmpty.png";
+import heart from "../../assets/heart.png";
 import { useDispatch, useSelector } from "react-redux";
 
 const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {

@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import * as Styled from "./MediaList.styles";
-import Centralizer from "./Centralizer";
-import Carousel from "./Carousel";
+import Centralizer from "../Centralizer";
+import Carousel from "../Carousel/Carousel";
 
-import emptyStar from "../assets/emptyStar.png";
-import starImage from "../assets/star.png";
-import heartEmpty from "../assets/heartEmpty.png";
-import heart from "../assets/heart.png";
+import emptyStar from "../../assets/emptyStar.png";
+import starImage from "../../assets/star.png";
+import heartEmpty from "../../assets/heartEmpty.png";
+import heart from "../../assets/heart.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectors as favoritesSelectors,
   actions as favoritesActions,
-} from "../state/favorites";
+} from "../../state/favorites";
 
 const HighlightedItem = ({ item }) => {
   const { id, title, description, year, titleType, rating } = item;

@@ -8,7 +8,7 @@ import {
   actions as mediaActions,
 } from "../state/media";
 
-import MediaList from "../components/MediaList";
+import MediaList from "../components/MediaList/MediaList";
 import { getMediaSummary } from "../utils";
 
 const Movies = () => {

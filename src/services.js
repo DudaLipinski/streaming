@@ -1,12 +1,12 @@
 // const options = {
 //   method: "GET",
 //   headers: {
-//     "X-RapidAPI-Key": "61b61662d5mshe5433faa725328ap147ba9jsn953457a4b170",
 //     "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
 //   },
 // };
 
-import { mostPopularMovies, mostPopularTvSeries } from "./mockedData";
+import { mostPopularMovies } from "./__mocks__/mostPopularMovies";
+import { mostPopularTvSeries } from "./__mocks__/mostPopularTvSeries";
 
 export const getMostPopularMovies = async () => {
   return mostPopularMovies;

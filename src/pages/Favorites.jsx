@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import { getMostPopularMoviesAndTvSeries } from "../services";
 
-import MediaList from "../components/MediaList";
+import MediaList from "../components/MediaList/MediaList";
 import { getMediaSummary } from "../utils";
 import { useSelector } from "react-redux";
 import { selectors as favoritesSelectors } from "../state/favorites";

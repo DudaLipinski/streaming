@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import * as Styled from "./Menu.styles";
-import Centralizer from "./Centralizer";
+import Centralizer from "../Centralizer";
 
-import heartEmpty from "../assets/heartEmpty.png";
-import search from "../assets/search.png";
+import heartEmpty from "../../assets/heartEmpty.png";
+// import search from "../../assets/search.png";
 
 const Menu = () => {
   const location = useLocation();
