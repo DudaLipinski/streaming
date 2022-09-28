@@ -34,7 +34,7 @@ const TvSeries = () => {
     return <Loading>Loading...</Loading>;
   }
 
-  return <MediaList items={tvSeries} title="Tv Series" />;
+  return <MediaList items={tvSeries} carouselTitle="Most popular Tv Series" />;
 };
 
 export default TvSeries;

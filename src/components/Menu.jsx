@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import * as Styled from "./Menu.styles";
+import Centralizer from "./Centralizer";
 
 import heartEmpty from "../assets/heartEmpty.png";
 import search from "../assets/search.png";
@@ -11,22 +12,23 @@ const Menu = () => {
 
   return (
     <Styled.Container>
-      <Styled.Centralizer>
-        <nav>
-          <Styled.MenuList>
-            <Styled.MenuItem>
-              <Link to="/movies">Movies</Link>
-              {pathname === "/movies" ? <Styled.Line /> : null}
-            </Styled.MenuItem>
-            <Styled.MenuItem>
-              <Link to="/tv-series">Tv Series</Link>
-              {pathname === "/tv-series" ? <Styled.Line /> : null}
-            </Styled.MenuItem>
-          </Styled.MenuList>
-        </nav>
-        <nav>
-          <Styled.MenuList>
-            {/* <form onSubmit={handleSearch}>
+      <Centralizer>
+        <Styled.MenuWrapper>
+          <nav>
+            <Styled.MenuList>
+              <Styled.MenuItem>
+                <Link to="/movies">Movies</Link>
+                {pathname === "/movies" ? <Styled.Line /> : null}
+              </Styled.MenuItem>
+              <Styled.MenuItem>
+                <Link to="/tv-series">Tv Series</Link>
+                {pathname === "/tv-series" ? <Styled.Line /> : null}
+              </Styled.MenuItem>
+            </Styled.MenuList>
+          </nav>
+          <nav>
+            <Styled.MenuList>
+              {/* <form onSubmit={handleSearch}>
               <input
                 type="text"
                 placeholder="Search"
@@ -36,12 +38,13 @@ const Menu = () => {
               />
               <Styled.Icon src={search} alt="" />
             </form> */}
-            <Link to="/favorites">
-              <Styled.Icon src={heartEmpty} alt="" />
-            </Link>
-          </Styled.MenuList>
-        </nav>
-      </Styled.Centralizer>
+              <Link to="/favorites">
+                <Styled.Icon src={heartEmpty} alt="" />
+              </Link>
+            </Styled.MenuList>
+          </nav>
+        </Styled.MenuWrapper>
+      </Centralizer>
     </Styled.Container>
   );
 };

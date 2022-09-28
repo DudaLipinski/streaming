@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import * as Styled from "./Carousel.styles";
+import Centralizer from "./Centralizer";
 import {
   selectors as favoritesSelectors,
   actions as favoritesActions,
@@ -21,8 +22,8 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
     dispatch(favoritesActions.removeFavorite(id));
 
   const itemsContainerRef = useRef();
+  const displayedItemsCount = useRef(0);
 
-  const displayedItemsCount = useRef(6);
   const [itemWidth, setItemWidth] = useState(0);
   const [leftmostItem, setLeftmostItem] = useState(0);
 
@@ -56,11 +57,23 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
   useEffect(() => {
     const itemsContainerWidth = itemsContainerRef.current.clientWidth;
 
-    if (itemsContainerWidth / displayedItemsCount.current < 280) {
+    if (itemsContainerWidth / displayedItemsCount.current > 180) {
+      displayedItemsCount.current = 2;
+    }
+
+    if (itemsContainerWidth / displayedItemsCount.current > 200) {
+      displayedItemsCount.current = 3;
+    }
+
+    if (itemsContainerWidth / displayedItemsCount.current > 250) {
       displayedItemsCount.current = 4;
     }
 
-    if (itemsContainerWidth / displayedItemsCount.current > 400) {
+    if (itemsContainerWidth / displayedItemsCount.current > 300) {
+      displayedItemsCount.current = 5;
+    }
+
+    if (itemsContainerWidth / displayedItemsCount.current > 350) {
       displayedItemsCount.current = 6;
     }
 
@@ -69,7 +82,7 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
     }
 
     setItemWidth(itemsContainerWidth / displayedItemsCount.current);
-  }, []);
+  }, [items]);
 
   useEffect(() => {
     setLeftmostItem(0);
@@ -77,9 +90,9 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
 
   return (
     <div>
-      <Styled.CentralizerTitle>
+      <Centralizer>
         <Styled.Title>{title}</Styled.Title>
-      </Styled.CentralizerTitle>
+      </Centralizer>
       <Styled.Container>
         <Styled.ArrowContainer
           disabled={!canSwipeLeft}

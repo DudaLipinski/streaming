@@ -34,7 +34,7 @@ const Movies = () => {
     return <Loading>Loading...</Loading>;
   }
 
-  return <MediaList items={movies} title="Movies" />;
+  return <MediaList items={movies} carouselTitle="Most popular Movies" />;
 };
 
 export default Movies;

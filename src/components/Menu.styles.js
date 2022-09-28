@@ -8,13 +8,12 @@ export const Container = styled.header`
   z-index: 1;
 `;
 
-export const Centralizer = styled.div`
+export const MenuWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: inherit;
-  padding: ${(props) => props.theme.centralizer.medium};
 `;
 
 export const MenuList = styled.ul`

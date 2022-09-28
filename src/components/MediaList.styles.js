@@ -30,10 +30,6 @@ export const Blur = styled.div`
   justify-content: space-around;
 `;
 
-export const Centralizer = styled.div`
-  padding: ${(props) => props.theme.centralizer.medium};
-`;
-
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,10 +40,19 @@ export const Wrapper = styled.div`
 export const Title = styled.h2`
   color: ${(props) => props.theme.colors.white};
   font-weight: 700;
-  font-size: 60px;
+  font-size: ${(props) => props.theme.fontSizes.bigTitle};
   margin: 0;
   letter-spacing: -4px;
   text-shadow: 0px 1px 3px rgb(0 0 0 / 55%);
+
+  @media screen and (max-width: 1024px) {
+    font-size: ${(props) => props.theme.fontSizes.big};
+    letter-spacing: 0px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSizes.large};
+  }
 `;
 
 export const Description = styled.p`
@@ -56,10 +61,15 @@ export const Description = styled.p`
   min-height: 100px;
 
   font-weight: 400;
-  font-size: 22px;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   line-height: 28px;
   letter-spacing: 0.17em;
   text-shadow: 0px 1px 3px rgb(0 0 0 / 55%);
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    font-size: ${(props) => props.theme.fontSizes.small};
+  }
 `;
 
 export const Rating = styled.div`
@@ -83,7 +93,7 @@ export const WrapperButtons = styled.div`
 export const Trailer = styled(Link)`
   color: ${(props) => props.theme.colors.blue};
   font-weight: 700;
-  font-size: 22px;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   line-height: 28px;
 
   &:hover,
@@ -92,6 +102,10 @@ export const Trailer = styled(Link)`
   }
   &:active {
     color: ${(props) => props.theme.colors.white};
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSizes.small};
   }
 `;
 
@@ -105,7 +119,7 @@ export const Watch = styled.button`
   background-color: ${(props) => props.theme.colors.blue};
   padding: 14px 54px;
 
-  font-size: 17px;
+  font-size: ${(props) => props.theme.fontSizes.small};
   font-weight: 600;
   text-decoration: none;
   text-shadow: 0px 1px 0px ${(props) => props.theme.colors.blue};
@@ -118,6 +132,12 @@ export const Watch = styled.button`
   :active {
     position: relative;
     top: 1px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSizes.small};
+    margin-right: 15px;
+    padding: 10px 15px;
   }
 `;
 

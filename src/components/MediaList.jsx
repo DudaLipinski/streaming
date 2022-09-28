@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import * as Styled from "./MediaList.styles";
+import Centralizer from "./Centralizer";
 import Carousel from "./Carousel";
 
 import emptyStar from "../assets/emptyStar.png";
@@ -42,7 +43,7 @@ const HighlightedItem = ({ item }) => {
   };
 
   return (
-    <Styled.Centralizer>
+    <Centralizer>
       <Styled.Wrapper>
         <Styled.Title>{title}</Styled.Title>
         <Styled.Description>{description}</Styled.Description>
@@ -77,7 +78,7 @@ const HighlightedItem = ({ item }) => {
           />
         </Styled.WrapperButtons>
       </Styled.Wrapper>
-    </Styled.Centralizer>
+    </Centralizer>
   );
 };
 

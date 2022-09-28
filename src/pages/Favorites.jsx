@@ -45,7 +45,7 @@ const Favorites = () => {
     return <Loading>You don't have favorites :( </Loading>;
   }
 
-  return <MediaList items={favoriteItems} title="Favorites" />;
+  return <MediaList items={favoriteItems} carouselTitle="Your favorites" />;
 };
 
 export default Favorites;

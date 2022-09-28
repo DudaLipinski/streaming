@@ -12,9 +12,13 @@ const theme = {
     small: "16px",
     medium: "22px",
     large: "26px",
+    big: "34px",
+    bigTitle: "60px",
   },
   centralizer: {
-    medium: "0 80px",
+    mobilePadding: "0 30px",
+    tabletPadding: "0 60px",
+    desktopPadding: "0 80px",
   },
 };
 
