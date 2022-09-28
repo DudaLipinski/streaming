@@ -26,7 +26,7 @@ export const ArrowIcon = styled.img`
   width: 60px;
   height: 60px;
 
-  @media screen and (max-width: 764px) {
+  @media screen and (max-width: 767px) {
     width: 30px;
     height: 30px;
   }
