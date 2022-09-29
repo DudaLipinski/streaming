@@ -25,4 +25,5 @@ export const actions = {
 export const selectors = {
   getMovies: (state) => state.media.movies,
   getTvSeries: (state) => state.media.tvSeries,
+  getMoviesAndTvSeries: (state) => state.media,
 };
