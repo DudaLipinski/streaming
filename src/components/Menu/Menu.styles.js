@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.header`
   width: 100%;
@@ -42,14 +43,42 @@ export const MenuItem = styled.li`
   }
 `;
 
-export const Icon = styled.img`
+export const WrapperHeart = styled(Link)`
+  display: flex;
+  align-content: center;
+  align-items: center;
+`;
+
+export const IconHeart = styled.img`
   width: 23px;
-  height: auto;
+  height: 23px;
   padding: 0 0 0 40px;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  align-content: center;
+  align-items: center;
+`;
+
+export const IconSearch = styled.img`
+  width: 23px;
+  height: 23px;
+  padding-left: 10px;
 `;
 
 export const Line = styled.div`
   border: 1px solid ${(props) => props.theme.colors.blue};
   width: 20px;
   position: absolute;
+`;
+
+export const Search = styled.input`
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #b7b7b7;
+  border-radius: 21px;
+  color: rgba(22, 22, 22, 1);
+  text-overflow: clip;
+  /* background: rgba(252, 252, 252, 0); */
 `;

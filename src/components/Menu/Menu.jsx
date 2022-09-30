@@ -4,11 +4,19 @@ import * as Styled from "./Menu.styles";
 import Centralizer from "../Centralizer";
 
 import heartEmpty from "../../assets/heartEmpty.png";
-// import search from "../../assets/search.png";
+import search from "../../assets/search.png";
+import { useDispatch } from "react-redux";
+import { actions as searchActions } from "../../state/search";
 
 const Menu = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const pathname = location.pathname;
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(searchActions.updateSearch(e.target.search.value));
+  };
 
   return (
     <Styled.Container>
@@ -28,19 +36,13 @@ const Menu = () => {
           </nav>
           <nav>
             <Styled.MenuList>
-              {/* <form onSubmit={handleSearch}>
-              <input
-                type="text"
-                placeholder="Search"
-                onChange={handleChange}
-                name="search"
-                // value={}
-              />
-              <Styled.Icon src={search} alt="" />
-            </form> */}
-              <Link to="/favorites">
-                <Styled.Icon src={heartEmpty} alt="" />
-              </Link>
+              <Styled.Form onSubmit={handleSearch}>
+                <Styled.Search type="text" placeholder="Search" name="search" />
+                <Styled.IconSearch src={search} alt="" />
+              </Styled.Form>
+              <Styled.WrapperHeart to="/favorites">
+                <Styled.IconHeart src={heartEmpty} alt="" />
+              </Styled.WrapperHeart>
             </Styled.MenuList>
           </nav>
         </Styled.MenuWrapper>

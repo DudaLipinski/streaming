@@ -1,51 +1,50 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
-import { getMostPopularMoviesAndTvSeries } from "../services";
 
 import MediaList from "../components/MediaList/MediaList";
-import { getMediaSummary } from "../utils";
 import { useSelector } from "react-redux";
 import { selectors as favoritesSelectors } from "../state/favorites";
+import useMovies from "../hooks/useMovies";
+import useTvSeries from "../hooks/useTvSeries";
+import useSearchable from "../hooks/useSearchable";
 
 const Favorites = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [items, setItems] = useState([]);
-  const [favoriteItems, setFavoriteItems] = useState([]);
+  const movies = useMovies();
+  const tvSeries = useTvSeries();
 
   const favorites = useSelector(favoritesSelectors.getFavorites);
 
-  const loadItems = async () => {
-    const result = await getMostPopularMoviesAndTvSeries();
-    const digestedItems = result.map(getMediaSummary);
+  const [favoriteItems, setFavoriteItems] = useState([]);
+  const filteredFavoriteItems = useSearchable(favoriteItems);
 
-    setItems(digestedItems);
-    setFavoriteItems(digestedItems.filter(({ id }) => favorites.includes(id)));
+  const filterFavoriteItems = () => {
+    const moviesAndTvSeries = [...movies, ...tvSeries];
 
-    setIsLoading(false);
+    setFavoriteItems(
+      moviesAndTvSeries.filter(({ id }) => favorites.includes(id))
+    );
   };
 
   useEffect(() => {
-    loadItems();
-  }, []);
-
-  useEffect(() => {
-    if (isLoading) {
+    if (!favorites?.length || !movies?.length || !tvSeries?.length) {
       return;
     }
 
-    setFavoriteItems(items.filter(({ id }) => favorites.includes(id)));
-  }, [favorites]);
-
-  if (isLoading) {
-    return <Loading>Loading...</Loading>;
-  }
+    filterFavoriteItems();
+  }, [favorites, movies, tvSeries]);
 
   if (!favoriteItems?.length) {
     return <Loading>You don't have favorites :( </Loading>;
   }
 
-  return <MediaList items={favoriteItems} carouselTitle="Your favorites" />;
+  if (!movies?.length || !tvSeries?.length) {
+    return <Loading>Loading...</Loading>;
+  }
+
+  return (
+    <MediaList items={filteredFavoriteItems} carouselTitle="Your Favorites" />
+  );
 };
 
 export default Favorites;
