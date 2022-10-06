@@ -22,7 +22,7 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
     dispatch(favoritesActions.removeFavorite(id));
 
   const itemsContainerRef = useRef();
-  const displayedItemsCount = useRef(0);
+  const displayedItemsCount = useRef(2);
 
   const [itemWidth, setItemWidth] = useState(0);
   const [leftmostItem, setLeftmostItem] = useState(0);
@@ -55,33 +55,33 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
   };
 
   useEffect(() => {
-    const itemsContainerWidth = itemsContainerRef.current.clientWidth;
-
-    if (itemsContainerWidth / displayedItemsCount.current > 180) {
-      displayedItemsCount.current = 2;
+    const containerWidth = itemsContainerRef?.current?.clientWidth;
+    if (!containerWidth) {
+      return;
     }
 
-    if (itemsContainerWidth / displayedItemsCount.current > 200) {
+    if (containerWidth > 600) {
       displayedItemsCount.current = 3;
     }
 
-    if (itemsContainerWidth / displayedItemsCount.current > 250) {
+    if (containerWidth > 768) {
       displayedItemsCount.current = 4;
     }
 
-    if (itemsContainerWidth / displayedItemsCount.current > 300) {
+    if (containerWidth > 1024) {
       displayedItemsCount.current = 5;
     }
 
-    if (itemsContainerWidth / displayedItemsCount.current > 350) {
+    if (containerWidth > 1680) {
       displayedItemsCount.current = 6;
     }
 
-    if (itemsContainerWidth / displayedItemsCount.current > 450) {
+    if (containerWidth > 1920) {
       displayedItemsCount.current = 7;
     }
 
-    setItemWidth(itemsContainerWidth / displayedItemsCount.current);
+    const itemWidth = containerWidth / displayedItemsCount.current;
+    setItemWidth(itemWidth);
   }, [items]);
 
   useEffect(() => {
@@ -94,12 +94,13 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
         <Styled.Title>{title}</Styled.Title>
       </Centralizer>
       <Styled.Container>
-        <Styled.ArrowContainer
-          disabled={!canSwipeLeft}
+        <Styled.ArrowButton
+          data-testid="left-button"
           onClick={handleLeftClick}
+          disabled={!canSwipeLeft}
         >
           {canSwipeLeft ? <Styled.ArrowIcon src={arrowLeft} alt="" /> : null}
-        </Styled.ArrowContainer>
+        </Styled.ArrowButton>
         <Styled.ItemsWrapper>
           <Styled.ItemsContainer
             itemWidth={itemWidth}
@@ -152,12 +153,13 @@ const Carousel = ({ title, items, highlightedItemIndex, onItemClick }) => {
               : null}
           </Styled.ItemsContainer>
         </Styled.ItemsWrapper>
-        <Styled.ArrowContainer
-          disabled={!canSwipeRight}
+        <Styled.ArrowButton
+          data-testid="right-button"
           onClick={handleRightClick}
+          disabled={!canSwipeRight}
         >
           {canSwipeRight ? <Styled.ArrowIcon src={arrowRight} alt="" /> : null}
-        </Styled.ArrowContainer>
+        </Styled.ArrowButton>
       </Styled.Container>
     </div>
   );

@@ -4,15 +4,18 @@ export const Container = styled.div`
   display: flex;
 `;
 
-export const ArrowContainer = styled.div`
+export const ArrowButton = styled.button`
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 80px;
 
-  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+  background-color: transparent;
+  border: 0;
 
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+  
   @media screen and (max-width: 1024px) {
     width: 60px;
   }

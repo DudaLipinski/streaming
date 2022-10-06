@@ -14,7 +14,7 @@ import {
   actions as favoritesActions,
 } from "../../state/favorites";
 
-const HighlightedItem = ({ item }) => {
+export const HighlightedItem = ({ item }) => {
   const { id, title, description, year, titleType, rating } = item;
 
   const dispatch = useDispatch();
