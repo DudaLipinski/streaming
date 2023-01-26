@@ -1,4 +1,4 @@
-# Streamming app
+# Streaming app
 
 Design inspiration:</br>
 https://www.figma.com/file/mN3Hr5rxOEnqT8tEaXO43x/Streaming-App?node-id=0%3A1
